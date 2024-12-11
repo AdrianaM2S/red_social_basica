@@ -54,15 +54,13 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'Red Social Básica',
       theme: ThemeData(
-        brightness: Brightness.light,
-        primarySwatch: Colors.blue,
-        accentColor: Colors.blueAccent,
-      ),
+          brightness: Brightness.light,
+          primarySwatch: Colors.blue,
+          colorScheme: ColorScheme.light()),
       darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.blue,
-        accentColor: Colors.blueAccent,
-      ),
+          brightness: Brightness.dark,
+          primarySwatch: Colors.blue,
+          colorScheme: ColorScheme.light()),
       themeMode: _themeMode, // Modo de tema seleccionado
       home: _defaultHome,
     );

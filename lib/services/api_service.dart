@@ -10,17 +10,12 @@ class ApiService {
 
   // Obtener lista de usuarios
   Future<List<User>> getUsers() async {
-    try {
-      final response = await http
-          .get(Uri.parse('$baseUrl/users'))
-          .timeout(const Duration(seconds: 10));
-      if (response.statusCode == 200) {
-// Procesar la respuesta
-      } else {
-        throw Exception('Error al cargar usuarios');
-      }
-    } on Exception catch (e) {
-      throw Exception('Error de red: $e');
+    final response = await http.get(Uri.parse('$baseUrl/users'));
+    if (response.statusCode == 200) {
+      List jsonResponse = json.decode(response.body);
+      return jsonResponse.map((user) => User.fromJson(user)).toList();
+    } else {
+      throw Exception('Error al cargar usuarios');
     }
   }
 
