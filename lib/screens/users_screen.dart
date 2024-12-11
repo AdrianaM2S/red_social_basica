@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:red_social_basica/screens/user_profile_screen.dart';
 import '../models/user.dart';
 import '../services/api_service.dart';
+import 'user_profile_screen.dart';
 
 class UsersScreen extends StatefulWidget {
   @override
@@ -11,11 +11,11 @@ class UsersScreen extends StatefulWidget {
 class _UsersScreenState extends State<UsersScreen> {
   ApiService apiService = ApiService();
   late Future<List<User>> futureUsers;
-
   @override
   void initState() {
     super.initState();
-    futureUsers = apiService.getUsers as Future<List<User>>;
+
+    futureUsers = apiService.getUsers();
   }
 
   @override
@@ -33,10 +33,6 @@ class _UsersScreenState extends State<UsersScreen> {
               itemCount: users.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  leading: CircleAvatar(
-                    child: Text(users[index].id.toString()),
-                  ),
-                  // Navegar al perfil del usuario
                   title: Text(users[index].name),
                   subtitle: Text('@${users[index].username}'),
                   onTap: () {
@@ -46,14 +42,14 @@ class _UsersScreenState extends State<UsersScreen> {
                           builder: (context) =>
                               UserProfileScreen(user: users[index])),
                     );
-                    // Navegar al perfil del usuario
                   },
                 );
               },
             );
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return Center(child: Text('Error:${snapshot.error}'));
           }
+
           return Center(child: CircularProgressIndicator());
         },
       ),

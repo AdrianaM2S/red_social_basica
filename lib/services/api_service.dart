@@ -6,16 +6,15 @@ import '../models/post.dart';
 import '../models/comment.dart';
 
 class ApiService {
-  final String baseUrl = 'https://jsonplaceholder.typicode.com';
+  final String baseUrl = 'https://jsonplaceholder.typicode.com/';
 
-  // Obtener lista de usuarios
   Future<List<User>> getUsers() async {
     final response = await http.get(Uri.parse('$baseUrl/users'));
     if (response.statusCode == 200) {
-      List jsonResponse = json.decode(response.body);
+      List<dynamic> jsonResponse = json.decode(response.body);
       return jsonResponse.map((user) => User.fromJson(user)).toList();
     } else {
-      throw Exception('Error al cargar usuarios');
+      throw Exception('Error al cargar usuarios: ${response.reasonPhrase}');
     }
   }
 

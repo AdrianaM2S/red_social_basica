@@ -21,7 +21,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     _loadThemePreference();
-    _checkLoginStatus();
   }
 
   // Cargar la preferencia de tema almacenada
