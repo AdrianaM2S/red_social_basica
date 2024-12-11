@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../services/api_service.dart';
 import '../models/user.dart';
+import 'package:provider/provider.dart';
+import '../providers/auth_provider.dart';
 import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -91,6 +93,8 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         _isLoading = true;
       });
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      bool success = await authProvider.login(_email, _password);
 
       try {
         List<User> users = await apiService.getUsers();
