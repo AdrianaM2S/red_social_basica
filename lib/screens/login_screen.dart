@@ -98,10 +98,10 @@ class _LoginScreenState extends State<LoginScreen> {
           (user) =>
               user.email.toLowerCase() == _email.toLowerCase() &&
               user.username == _password,
-          orElse: () => null,
+          orElse: () => User(id: 0, email: '', username: '', name: ''),
         );
 
-        if (user != null) {
+        if (user.id != 0) {
           // Guardar la sesión del usuario
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setInt('userId', user.id);
