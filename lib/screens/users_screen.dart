@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:red_social_basica/screens/user_profile_screen.dart';
 import '../models/user.dart';
 import '../services/api_service.dart';
 
@@ -14,7 +15,7 @@ class _UsersScreenState extends State<UsersScreen> {
   @override
   void initState() {
     super.initState();
-    futureUsers = apiService.getUsers;
+    futureUsers = apiService.getUsers as Future<List<User>>;
   }
 
   @override
